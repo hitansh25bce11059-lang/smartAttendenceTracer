@@ -81,3 +81,105 @@ Follow on-screen prompts for each option. Inputs are interactive.
 ---
 Generated README for `VITyarthi Project 24-11-2025.py` — keep this file next to the script and `attendance.csv` for best results.
 
+**Project Title**
+
+- **VITyarthi Attendance Tracker**
+
+**Overview of the project**
+
+- VITyarthi Attendance Tracker is a lightweight command-line Python application for recording, viewing and updating student attendance. It is aimed at small classes or single-instructor scenarios where a simple CSV-backed persistence layer is sufficient. The application lists students, prompts for attendance (Present/Absent) for a given date, and stores the results in `attendance.csv`.
+
+**Features**
+
+- Mark today's attendance (interactive; accepts `P`/`A`).
+- Check class attendance for any date (tabular view).
+- Check a single student's attendance for a date (lookup by registration number or name).
+- Update an individual student's attendance record for a specific date.
+- Update student details (name and registration number) by serial number; updates historical attendance entries accordingly.
+- Add new students with registration number validation (exactly 10 characters).
+- CSV-based persistence with a header and safe load/save behaviors.
+
+**Technologies / Tools Used**
+
+- Python 3.8+ (standard library only required for running the current script).
+- Built-in modules: `csv`, `os`.
+- Optional (for improved testing/development): `pytest` for unit testing.
+
+**Steps to install & run the project**
+
+1. Install Python 3.8 or newer (https://www.python.org/downloads/).
+2. (Optional but recommended) Create and activate a virtual environment.
+
+PowerShell example (Windows):
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+```
+
+3. Run the app from the project folder:
+```powershell
+python "VITyarthi Project 24-11-2025.py"
+```
+
+Notes:
+- The application will create `attendance.csv` when saving attendance for the first time.
+- Keep the `VITyarthi Project 24-11-2025.py` script and `attendance.csv` in the same folder.
+
+**Instructions for testing**
+
+Manual testing (quick smoke tests):
+- Start the script and select option `1` to mark attendance for a date. Enter `P`/`A` for each listed student and verify `attendance.csv` has been created/updated.
+- Use option `2` to view class attendance for the date used above.
+- Use option `3` and provide a name or registration number + the date to verify a single record.
+- Intentionally enter invalid values (e.g., wrong reg no length, invalid attendance letters like `X`) to confirm validation messages are shown.
+
+Automated testing (recommended):
+- The repository does not include unit tests by default. To add tests, install `pytest` in your virtual environment and write tests that exercise `load_attendance()`, `save_attendance()` and the pure functions such as `find_student_by_input()`.
+
+Example commands to run tests after adding them:
+```powershell
+python -m pip install pytest
+pytest -q
+```
+
+Test suggestions:
+- Create a temporary CSV file fixture and assert `load_attendance()` reads rows correctly.
+- Test `save_attendance()` writes expected headers and rows.
+- Test student-update flows: renaming a student and ensuring attendance records reflect the change.
+
+**Screenshots (optional)**
+
+- Add screenshots to a `screenshots/` folder and reference them in this README. Example markup to include an image:
+
+```markdown
+![Main menu screenshot](screenshots/menu.png)
+```
+
+Small inline example of the CLI menu (text):
+
+```
+===== VITyarthi Attendance Project =====
+1. Mark today's attendance
+2. Check attendance of class
+3. Check attendance of student
+4. Update attendance of student
+5. Update student details
+6. Add new students
+7. Exit
+```
+
+**Where to file issues / contribute**
+
+- Create issues or pull requests against this repository for bug reports or feature suggestions. If you submit code, please include tests and keep changes focused.
+
+**Further improvements (suggested)**
+
+- Enforce strict date parsing using `datetime.strptime` to avoid malformed dates.
+- Add a small SQLite backend or use `pandas` for more robust storage and analysis.
+- Add unit tests and CI (GitHub Actions) to run tests automatically on push/PR.
+- Add a GUI or web frontend for easier use in real classrooms.
+
+---
+If you want, I can create an example `attendance.csv` and a `screenshots/` folder with a sample screenshot placeholder. Tell me which you'd like next.
+
